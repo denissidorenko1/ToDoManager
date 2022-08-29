@@ -1,10 +1,3 @@
-//
-//  TaskTypeCellTableViewCell.swift
-//  ToDo manager
-//
-//  Created by Denis on 24.08.2022.
-//
-
 import UIKit
 
 class TaskTypeCell: UITableViewCell {
@@ -12,6 +5,8 @@ class TaskTypeCell: UITableViewCell {
     @IBOutlet var typeTitle: UILabel!
     @IBOutlet var typeDescription: UILabel!
 
+    
+    //MARK: - function overrides
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,8 +14,6 @@ class TaskTypeCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-    
 }

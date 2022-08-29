@@ -1,5 +1,6 @@
 import Foundation
 
+
 // Протокол, описывающий сущность "Хранилище задач"
 protocol TasksStorageProtocol {
     func loadTasks() -> [TaskProtocol]
@@ -21,6 +22,7 @@ class TasksStorage: TasksStorageProtocol {
     }
     
     
+    // Функция загрузки записей из UserDefaults
     func loadTasks() -> [TaskProtocol] {
         var resultTasks: [TaskProtocol] = []
         let tasksFromStorage = storage.array(forKey: storageKey) as? [[String:String]] ?? []
@@ -34,13 +36,12 @@ class TasksStorage: TasksStorageProtocol {
             let type: TaskPriority = typeRaw == "important" ? .important : .normal
             let status: TaskStatus = statusRaw == "planned" ? .planned : .completed
             resultTasks.append(Task(title: title, type: type, status: status)) }
-        print("Loading data from UserDefaults: \(resultTasks)")
         return resultTasks
     }
     
     
+    // Функция загрузки записей в UserDefaults
     func saveTasks(_ tasks: [TaskProtocol]) {
-        print("TaskStorage saveTask")
         var arrayForStorage: [[String:String]] = []
         tasks.forEach { task in
             var newElementForStorage: Dictionary<String, String> = [:]
@@ -49,6 +50,5 @@ class TasksStorage: TasksStorageProtocol {
             newElementForStorage[TaskKey.status.rawValue] = (task.status == .planned) ? "planned" : "completed"
             arrayForStorage.append(newElementForStorage)
         }
-        print(arrayForStorage)
         storage.set(arrayForStorage, forKey: storageKey) }
 }
