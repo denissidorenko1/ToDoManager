@@ -138,6 +138,10 @@ class TaskListController: UITableViewController {
             } }
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(20)
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title: String?
         let tasksType = sectionsTypesPosition[section]
