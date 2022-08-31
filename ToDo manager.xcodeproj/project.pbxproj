@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9244543028BFAD8D00E2CB72 /* InputChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9244542F28BFAD8D00E2CB72 /* InputChecker.swift */; };
 		9289DAB228B41F4D00003DEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289DAB128B41F4D00003DEB /* AppDelegate.swift */; };
 		9289DAB428B41F4D00003DEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289DAB328B41F4D00003DEB /* SceneDelegate.swift */; };
 		9289DAB928B41F4D00003DEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9289DAB728B41F4D00003DEB /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9244542F28BFAD8D00E2CB72 /* InputChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChecker.swift; sourceTree = "<group>"; };
 		9289DAAE28B41F4D00003DEB /* ToDo manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDo manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9289DAB128B41F4D00003DEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9289DAB328B41F4D00003DEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,9 +53,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9244542E28BFAD6D00E2CB72 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9244542F28BFAD8D00E2CB72 /* InputChecker.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		9289DAA528B41F4D00003DEB = {
 			isa = PBXGroup;
 			children = (
+				9244542E28BFAD6D00E2CB72 /* Helpers */,
 				9289DACC28B4325500003DEB /* View */,
 				9289DAC728B4269600003DEB /* Model */,
 				9289DAB028B41F4D00003DEB /* ToDo manager */,
@@ -184,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9244543028BFAD8D00E2CB72 /* InputChecker.swift in Sources */,
 				9289DAD128B5793600003DEB /* TaskEditController.swift in Sources */,
 				9289DACF28B4327C00003DEB /* TaskCell.swift in Sources */,
 				9289DAD428B581EA00003DEB /* TaskTypeCell.swift in Sources */,
@@ -354,7 +366,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "denissidorenko.ToDo-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -383,7 +395,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "denissidorenko.ToDo-manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 
 class TaskEditController: UITableViewController {
     
@@ -16,9 +17,16 @@ class TaskEditController: UITableViewController {
     
     @IBAction func saveTask(_ sender: UIBarButtonItem) {
         // получаем актуальные значения
-        let title = taskTitle?.text ?? ""
+        var title = taskTitle?.text ?? ""
         let type = taskType
         let status: TaskStatus = taskStatusSwitch.isOn ? .completed : .planned
+        
+        guard let _ = InputChecker().check(input: &title) else {
+            let alert = UIAlertController( title: "Ошибка", message: "Поле не заполнено", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         // вызываем обработчик
         doAfterEdit?(title, type, status)
         // возвращаемся к предыдущему экрану
