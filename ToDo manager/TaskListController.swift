@@ -119,8 +119,8 @@ class TaskListController: UITableViewController {
         // изменяем цвет текста
         //TODO: может, лучше использовать тернарный оператор?
         if currentTask.status == .planned {
-            cell.title.textColor = .black
-            cell.symbol.textColor = .black
+            cell.title.textColor = UIColor(named: "TaskTextColor")
+            cell.symbol.textColor = UIColor(named: "TaskTextColor")
         } else {
             cell.title.textColor = .lightGray
             cell.symbol.textColor = .lightGray
