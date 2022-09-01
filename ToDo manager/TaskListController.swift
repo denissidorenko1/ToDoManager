@@ -7,6 +7,11 @@ class TaskListController: UITableViewController {
     var sectionsTypesPosition: [TaskPriority] = [.important, .normal]
     var tasksStatusPosition: [TaskStatus] = [.planned, .completed]
     
+    // Лейблы для ситуаций, когда задач соответствующего типа нет
+    // В случае когда задачи существуют, лейблы не будут созданы до момента опустошения хранилища задач
+    lazy var emptyImportantLabel = UILabel()
+    lazy var emptyNormalLabel = UILabel()
+    
     // долговременное хранилище задач в UserDefaults
     var tasksStorage: TasksStorageProtocol = TasksStorage()
     // коллекция задач
@@ -160,6 +165,18 @@ class TaskListController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //после инициализации всех вью задаем координаты лейблам отсутствия задач
+        configureLabelCoords()
+    }
+    
+    // обновляем координаты лейблов при изменении положения лейблов разделов
+    func configureLabelCoords() {
+        emptyNormalLabel.frame = tableView.rectForFooter(inSection: 1).offsetBy(dx: 20, dy: -5)
+        emptyImportantLabel.frame = tableView.rectForFooter(inSection: 0).offsetBy(dx: 20, dy: -5)
+    }
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tasks.count
@@ -170,6 +187,23 @@ class TaskListController: UITableViewController {
         guard let currentTasksType = tasks[taskType]
         else {
             return 0
+        }
+        // проверка на отсутствие задач по секциям
+        if currentTasksType.isEmpty && section == 0 {
+            emptyImportantLabel.text = "Важных задач нет"
+            emptyImportantLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            self.tableView.addSubview(emptyImportantLabel)
+        }
+        else if section == 0 {
+            emptyImportantLabel.removeFromSuperview()
+        }
+        if currentTasksType.isEmpty && section == 1 {
+            emptyNormalLabel.text = "Текущих задач нет"
+            emptyNormalLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            self.tableView.addSubview(emptyNormalLabel)
+        }
+        else if section == 1 {
+            emptyNormalLabel.removeFromSuperview()
         }
         return currentTasksType.count
     }
@@ -184,7 +218,9 @@ class TaskListController: UITableViewController {
         tasks[taskType]?.remove(at: indexPath.row)
         // удаляем строку, соответствующую задаче
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        
+        tableView.reloadData()
+        // при удалении задачи нужно пересчитать положение лейбла
+        configureLabelCoords()
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
